@@ -601,11 +601,11 @@ static int form_size_position(struct dialog *d, struct privateform *f)
 }
 
 static int
-form_redraw(struct dialog *d, struct privateform *f, bool focusinform)
+form_draw(struct dialog *d, bool redraw, struct privateform *f, bool focusinform)
 {
 	unsigned int i;
 
-	if (d->built) {
+	if (redraw) {
 		hide_dialog(d);
 		refresh(); /* Important for decreasing screen */
 	}
@@ -613,9 +613,9 @@ form_redraw(struct dialog *d, struct privateform *f, bool focusinform)
 	f->w = f->wmin;
 	if (form_size_position(d, f) != 0)
 		return (BSDDIALOG_ERROR);
-	if (draw_dialog(d) != 0)
+	if (draw_dialog(d) != 0) /* doupdate() in main loop */
 		return (BSDDIALOG_ERROR);
-	if (d->built)
+	if (redraw)
 		refresh(); /* Important to fix grey lines expanding screen */
 	TEXTPAD(d, 2 /* box borders */ + f->viewrows + HBUTTONS);
 
@@ -707,7 +707,7 @@ bsddialog_form(struct bsddialog_conf *conf, const char *text, int rows,
 	}
 
 	form.formheight = formheight;
-	if (form_redraw(&d, &form, focusinform) != 0)
+	if (form_draw(&d, false, &form, focusinform) != 0)
 		return (BSDDIALOG_ERROR);
 
 	changeitem = switchfocus = false;
@@ -839,12 +839,12 @@ bsddialog_form(struct bsddialog_conf *conf, const char *text, int rows,
 				retval = BSDDIALOG_ERROR;
 				loop = false;
 			}
-			if (form_redraw(&d, &form, focusinform) != 0)
+			if (form_draw(&d, true, &form, focusinform) != 0)
 				return (BSDDIALOG_ERROR);
 			break;
 		case KEY_CTRL('l'):
 		case KEY_RESIZE:
-			if (form_redraw(&d, &form, focusinform) != 0)
+			if (form_draw(&d, true, &form, focusinform) != 0)
 				return (BSDDIALOG_ERROR);
 			break;
 		default:

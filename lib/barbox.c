@@ -440,17 +440,18 @@ bsddialog_progressview (struct bsddialog_conf *conf, const char *text, int rows,
 	return (retval);
 }
 
-static int rangebox_redraw(struct dialog *d, struct bar *b, int *bigchange)
+static int
+rangebox_redraw(struct dialog *d, bool redraw, struct bar *b, int *bigchange)
 {
-	if (d->built) {
+	if (redraw) {
 		hide_dialog(d);
 		refresh(); /* Important for decreasing screen */
 	}
 	if (dialog_size_position(d, HBOX, MIN_WBOX, NULL) != 0)
 		return (BSDDIALOG_ERROR);
-	if (draw_dialog(d) != 0)
+	if (draw_dialog(d) != 0) /* doupdate() in main loop */
 		return (BSDDIALOG_ERROR);
-	if (d->built)
+	if (redraw)
 		refresh(); /* Important to fix grey lines expanding screen */
 	TEXTPAD(d, HBOX + HBUTTONS);
 
@@ -490,7 +491,7 @@ bsddialog_rangebox(struct bsddialog_conf *conf, const char *text, int rows,
 		RETURN_ERROR("Cannot build WINDOW bar");
 	b.y = b.x = 1;
 	b.fmt = "%d";
-	if (rangebox_redraw(&d, &b, &bigchange) != 0)
+	if (rangebox_redraw(&d, false, &b, &bigchange) != 0)
 		return (BSDDIALOG_ERROR);
 
 	loop = true;
@@ -568,12 +569,12 @@ bsddialog_rangebox(struct bsddialog_conf *conf, const char *text, int rows,
 				break;
 			if (f1help_dialog(conf) != 0)
 				return (BSDDIALOG_ERROR);
-			if (rangebox_redraw(&d, &b, &bigchange) != 0)
+			if (rangebox_redraw(&d, true, &b, &bigchange) != 0)
 				return (BSDDIALOG_ERROR);
 			break;
 		case KEY_CTRL('l'):
 		case KEY_RESIZE:
-			if (rangebox_redraw(&d, &b, &bigchange) != 0)
+			if (rangebox_redraw(&d, true, &b, &bigchange) != 0)
 				return (BSDDIALOG_ERROR);
 			break;
 		default:
@@ -594,17 +595,17 @@ bsddialog_rangebox(struct bsddialog_conf *conf, const char *text, int rows,
 	return (retval);
 }
 
-static int pause_redraw(struct dialog *d, struct bar *b)
+static int pause_redraw(struct dialog *d, bool redraw, struct bar *b)
 {
-	if (d->built) {
+	if (redraw) {
 		hide_dialog(d);
 		refresh(); /* Important for decreasing screen */
 	}
 	if (dialog_size_position(d, HBOX, MIN_WBOX, NULL) != 0)
 		return (BSDDIALOG_ERROR);
-	if (draw_dialog(d) != 0)
+	if (draw_dialog(d) != 0) /* doupdate() in main loop */
 		return (BSDDIALOG_ERROR);
-	if (d->built)
+	if (redraw)
 		refresh(); /* Important to fix grey lines expanding screen */
 	TEXTPAD(d, HBOX + HBUTTONS);
 
@@ -633,7 +634,7 @@ bsddialog_pause(struct bsddialog_conf *conf, const char *text, int rows,
 		RETURN_ERROR("Cannot build WINDOW bar");
 	b.y = b.x = 1;
 	b.fmt = "%d";
-	if (pause_redraw(&d, &b) != 0)
+	if (pause_redraw(&d, false, &b) != 0)
 		return (BSDDIALOG_ERROR);
 
 	tout = *seconds;
@@ -687,12 +688,12 @@ bsddialog_pause(struct bsddialog_conf *conf, const char *text, int rows,
 				break;
 			if (f1help_dialog(conf) != 0)
 				return (BSDDIALOG_ERROR);
-			if (pause_redraw(&d, &b) != 0)
+			if (pause_redraw(&d, true, &b) != 0)
 				return (BSDDIALOG_ERROR);
 			break;
 		case KEY_CTRL('l'):
 		case KEY_RESIZE:
-			if (pause_redraw(&d, &b) != 0)
+			if (pause_redraw(&d, true, &b) != 0)
 				return (BSDDIALOG_ERROR);
 			break;
 		default:

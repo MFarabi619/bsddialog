@@ -11,6 +11,14 @@ next 1.0.5
 	    * fix: textbox buttons return values (was always OK).
 	      Thanks to https://reviews.freebsd.org/D48668.
 
+	Library (no functional change):
+	    * fix: useless dialog second refresh at "init dialog *_draw()",
+	      "It takes lot of time when running over a 115200 UART":
+	      https://gitlab.com/alfix/bsddialog/-/issues/8.
+	      To note, not fixed for bsddialog_gauge() because it has to be
+	      rewritten.
+
+
 2024-07-01 1.0.4
 
 	Utility internal refactoring (no functional change):
