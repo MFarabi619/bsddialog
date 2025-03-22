@@ -1,5 +1,9 @@
 next 1.0.5
 
+	NetBSD refactoring (no functiona change):
+	    * https://gitlab.com/alfix/bsddialog/-/merge_requests/4
+	      include <stdarg.h> in lib_util.c,
+
 2024-07-01 1.0.4
 
 	Utility internal refactoring (no functional change):
