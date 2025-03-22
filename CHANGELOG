@@ -3,6 +3,9 @@ next 1.0.5
 	NetBSD (tested on amd64) refactoring (no functional change):
 	    * https://gitlab.com/alfix/bsddialog/-/merge_requests/4
 	      lib: include <stdarg.h> in lib_util.c.
+	    * https://gitlab.com/alfix/bsddialog/-/merge_requests/5
+	      a call to curses' refresh() is performed, while a local
+	      variable is also called refresh.
 	MacOS (tested on amd64) refactoring (no functional change):
 	    * https://gitlab.com/alfix/bsddialog/-/merge_requests/6
 	      utility: replace u_int with unsigned int.
