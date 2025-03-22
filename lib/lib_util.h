@@ -62,7 +62,7 @@ extern bool hastermcolors;
 		RETURN_ERROR("*" #p " is NULL");                               \
 } while (0)
 #define CHECK_ARRAY(nitem, a) do {                                             \
-	if (nitem > 0 && a == NULL)                                             \
+	if (nitem > 0 && a == NULL)                                            \
 		RETURN_FMTERROR(#nitem " is %d but *" #a " is NULL", nitem);   \
 } while (0)
 /* widget utils */
