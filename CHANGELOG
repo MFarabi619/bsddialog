@@ -1,8 +1,11 @@
 next 1.0.5
 
-	NetBSD (tested on amd64) refactoring (no functiona change):
+	NetBSD (tested on amd64) refactoring (no functional change):
 	    * https://gitlab.com/alfix/bsddialog/-/merge_requests/4
-	      include <stdarg.h> in lib_util.c.
+	      lib: include <stdarg.h> in lib_util.c.
+	MacOS (tested on amd64) refactoring (no functional change):
+	    * https://gitlab.com/alfix/bsddialog/-/merge_requests/6
+	      utility: replace u_int with unsigned int.
 
 2024-07-01 1.0.4
 
