@@ -7,6 +7,10 @@ next 1.0.5
 	    * https://gitlab.com/alfix/bsddialog/-/merge_requests/6
 	      utility: replace u_int with unsigned int.
 
+	Library and implicitly utility:
+	    * fix: textbox buttons return values (was always OK).
+	      Thanks to https://reviews.freebsd.org/D48668.
+
 2024-07-01 1.0.4
 
 	Utility internal refactoring (no functional change):
