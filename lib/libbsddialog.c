@@ -114,9 +114,19 @@ int bsddialog_backtitle(struct bsddialog_conf *conf, const char *backtitle)
 			mvhline_set(1, 1, WACS_HLINE, SCREENCOLS - 2);
 	}
 
-	refresh();
+	wnoutrefresh(stdscr);
 
 	return (BSDDIALOG_OK);
+}
+
+int bsddialog_backtitle_rf(struct bsddialog_conf *conf, const char *backtitle)
+{
+	int rv;
+
+	rv = bsddialog_backtitle(conf, backtitle);
+	doupdate();
+
+	return (rv);
 }
 
 bool bsddialog_inmode(void)

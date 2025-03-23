@@ -21,6 +21,13 @@ next 1.0.5
 	      To note, not fixed for bsddialog_gauge() because it has to be
 	      rewritten.
 
+	Library:
+	    * change: bsddialog_backtitle() does not update the screen so the
+	      backtitle is not printed. To use if a dialog is built later.
+	      Rationale: see "115200 UART" problem above.
+	    * add: bsddialog_backtitle_rf() to print a top title refreshing the
+	      screen like bsddialog_backtitle() was previously.
+
 
 2024-07-01 1.0.4
 

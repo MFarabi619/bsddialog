@@ -217,7 +217,7 @@ int bsddialog_set_theme(struct bsddialog_theme *theme)
 {
 	CHECK_PTR(theme);
 	set_theme(&t, theme);
-	refresh();
+	wnoutrefresh(stdscr);
 
 	return (BSDDIALOG_OK);
 }
@@ -239,7 +239,7 @@ int bsddialog_set_default_theme(enum bsddialog_default_theme newtheme)
 		    "to use enum bsddialog_default_theme",
 		    newtheme);
 	}
-	refresh();
+	wnoutrefresh(stdscr);
 
 	return (BSDDIALOG_OK);
 }
