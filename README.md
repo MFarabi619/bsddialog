@@ -129,7 +129,6 @@ in the _Public Domain_ to build new projects:
  - implement global buttons handler.
  - doc: external tutorial, theming guide.
  - implement menutype.min\_on.
- - improve refresh at startup, avoid dialog refresh before drawing text.
  - add debug API: bsddialog\_debug(y,x,refresh,"fmt",...).
  - add mouse support.
  - use alarm(2) for bsddialog\_pause.

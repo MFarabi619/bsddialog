@@ -391,7 +391,7 @@ drawitem(struct bsddialog_conf *conf, struct privatemenu *m, int y, bool focus)
 			attron(t.menu.bottomdesccolor);
 			addstr(pritem->bottomdesc);
 			attroff(t.menu.bottomdesccolor);
-			refresh();
+			wnoutrefresh(stdscr);
 		}
 	}
 }
