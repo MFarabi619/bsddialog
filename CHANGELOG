@@ -1,5 +1,6 @@
 next 1.0.5
 
+	No functional change:
 	NetBSD (tested on amd64) refactoring (no functional change):
 	    * https://gitlab.com/alfix/bsddialog/-/merge_requests/4
 	      lib: include <stdarg.h> in lib_util.c.
@@ -9,12 +10,7 @@ next 1.0.5
 	MacOS (tested on amd64) refactoring (no functional change):
 	    * https://gitlab.com/alfix/bsddialog/-/merge_requests/6
 	      utility: replace u_int with unsigned int.
-
-	Library and implicitly utility:
-	    * fix: textbox buttons return values (was always OK).
-	      Thanks to https://reviews.freebsd.org/D48668.
-
-	Library (no functional change):
+	Library:
 	    * fix: useless dialog second refresh at "init dialog *_draw()",
 	      "It takes lot of time when running over a 115200 UART":
 	      https://gitlab.com/alfix/bsddialog/-/issues/8.
@@ -27,6 +23,10 @@ next 1.0.5
 	      Rationale: see "115200 UART" problem above.
 	    * add: bsddialog_backtitle_rf() to print a top title refreshing the
 	      screen like bsddialog_backtitle() was previously.
+
+	Library and implicitly utility:
+	    * fix: textbox buttons return values (was always OK).
+	      Thanks to https://reviews.freebsd.org/D48668.
 
 
 2024-07-01 1.0.4
