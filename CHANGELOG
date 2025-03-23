@@ -11,7 +11,7 @@ next 1.0.5
 	    * https://gitlab.com/alfix/bsddialog/-/merge_requests/6
 	      utility: replace u_int with unsigned int.
 	Library:
-	    * fix: useless dialog second refresh at "init dialog *_draw()",
+	    * fix: useless refreshes,
 	      "It takes lot of time when running over a 115200 UART":
 	      https://gitlab.com/alfix/bsddialog/-/issues/8.
 	      To note, not fixed for bsddialog_gauge() because it has to be
