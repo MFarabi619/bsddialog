@@ -279,7 +279,7 @@ void loadtheme(const char *file, bool compatibility)
 			break;
 		case BOOL:
 			boolvalue = (strstr(value, "true") != NULL) ?
-			    true :false;
+			    true : false;
 			*((bool*)p[i].value) = boolvalue;
 			break;
 		case COLOR:
