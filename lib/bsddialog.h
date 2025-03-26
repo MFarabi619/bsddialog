@@ -179,6 +179,7 @@ int bsddialog_init_notheme(void);
 bool bsddialog_inmode(void);
 int bsddialog_end(void);
 int bsddialog_backtitle(struct bsddialog_conf *conf, const char *backtitle);
+int bsddialog_backtitle_rf(struct bsddialog_conf *conf, const char *backtitle);
 int bsddialog_initconf(struct bsddialog_conf *conf);
 void bsddialog_clear(unsigned int y);
 void bsddialog_refresh(void);
