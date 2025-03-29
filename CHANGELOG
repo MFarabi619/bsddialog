@@ -16,6 +16,10 @@ next 1.0.5
 	      https://gitlab.com/alfix/bsddialog/-/issues/8.
 	      To note, not fixed for bsddialog_gauge() because it has to be
 	      rewritten.
+	Manual:
+	    * fix: "User-friendly documentation for alternate screen"
+	      https://bugs.freebsd.org/285459.
+	      Improve bsddialog.1: --alternate-screen and --normal-screen.
 
 	Library:
 	    * change: bsddialog_backtitle() does not update the screen so the
