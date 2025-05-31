@@ -33,14 +33,14 @@ next 1.0.5
 	      Thanks to https://reviews.freebsd.org/D48668.
 
 
-2024-07-01 1.0.4
+2024-07-01 Version 1.0.4
 
 	Utility internal refactoring (no functional change):
 	* change: rename an internal constant to avoid a future conflict
 	    because FreeBSD is changing headers files for _FORTIFY_SOURCE.
 	    Reported and fixed by Kyle Evans.
 
-2024-05-27 1.0.3
+2024-05-27 Version 1.0.3
 
 	Utility:
 	change: --form and --mixedform do not print field value to output fd if
