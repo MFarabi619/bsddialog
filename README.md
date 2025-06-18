@@ -138,4 +138,5 @@ in the _Public Domain_ to build new projects:
  - fix --mixedform "" 0 0 0 Label 1 0 Init 1 12 0 0 2 (with 0 editable field).
  - add *text* customization to --hmsg *help-message*
  - check --passwordform *fieldlen* like --form and --mixedform.
-
+ - add TAB navigation in forms. Now thas switches fields/buttons.
+ - add ENTER navigation in form. Now ENTER is handled only for buttons.
