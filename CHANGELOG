@@ -1,47 +1,45 @@
 next 1.0.5
 
-	No functional change:
-	NetBSD (tested on amd64) refactoring:
-	    * https://gitlab.com/alfix/bsddialog/-/merge_requests/4
-	      lib: include <stdarg.h> in lib_util.c.
-	    * https://gitlab.com/alfix/bsddialog/-/merge_requests/5
-	      a call to curses' refresh() is performed, while a local
-	      variable is also called refresh.
-	MacOS (tested on amd64) refactoring:
-	    * https://gitlab.com/alfix/bsddialog/-/merge_requests/6
-	      utility: replace u_int with unsigned int.
-	Library:
-	    * fix: useless refreshes,
-	      "It takes lot of time when running over a 115200 UART":
-	      https://gitlab.com/alfix/bsddialog/-/issues/8.
-	      To note, not fixed for bsddialog_gauge() because it has to be
-	      rewritten.
 	Manual:
-	    * fix: "User-friendly documentation for alternate screen"
-	      https://bugs.freebsd.org/285459.
-	      Improve bsddialog.1: --alternate-screen and --normal-screen.
+	* fix: "User-friendly documentation for alternate screen"
+	  https://bugs.freebsd.org/285459.
+	  Improve bsddialog.1: --alternate-screen and --normal-screen.
+
+	NetBSD (tested on amd64) refactoring, no function changes:
+	* https://gitlab.com/alfix/bsddialog/-/merge_requests/4
+	  lib: include <stdarg.h> in lib_util.c.
+	* https://gitlab.com/alfix/bsddialog/-/merge_requests/5
+	  a call to curses' refresh() is performed, while a local
+	  variable is also called refresh.
+
+	MacOS (tested on amd64) refactoring, no function changes:
+	* https://gitlab.com/alfix/bsddialog/-/merge_requests/6
+	  utility: replace u_int with unsigned int.
 
 	Library:
-	    * change: bsddialog_backtitle() does not update the screen so the
-	      backtitle is not printed. To use if a dialog is built later.
-	      Rationale: see "115200 UART" problem above.
-	    * add: bsddialog_backtitle_rf() to print a top title refreshing the
-	      screen like bsddialog_backtitle() was previously.
-	    * change: forms, ENTER is also a navigation keys in forms fields.
-	      Request: https://bugs.freebsd.org/287592
-	      If conf.button.always_active is true the form is closes immediatly.
+	* fix: useless refreshes, https://gitlab.com/alfix/bsddialog/-/issues/8:
+	  "It takes lot of time when running over a 115200 UART".
+	  Not fixed for bsddialog_gauge() because it has to be rewritten.
+	* change: bsddialog_backtitle() does not update the screen so the
+	  backtitle is not printed. To use if a dialog is built later.
+	  Rationale: see "115200 UART" problem above.
+	* add: bsddialog_backtitle_rf() to print a top title refreshing the
+	  screen like bsddialog_backtitle() was previously.
+	* change: forms, ENTER is also a navigation keys in forms fields.
+	  Request: https://bugs.freebsd.org/287592
+	  If conf.button.always_active is true the form is closes immediatly.
 
 	Library and implicitly utility:
-	    * fix: textbox buttons returned values (was always OK).
-	      Thanks to https://reviews.freebsd.org/D48668.
-	    * change: TAB is a navigation keys in forms. Previously it directly
-	      switched form-fields <-> buttons.
-	      Request: https://bugs.freebsd.org/287592
+	* fix: textbox buttons returned values (was always OK).
+	  Thanks to https://reviews.freebsd.org/D48668.
+	* change: TAB is a navigation keys in forms. Previously it directly
+	  switched form-fields <-> buttons.
+	  Request: https://bugs.freebsd.org/287592
 
 	Utility:
-	    * change: forms, ENTER is a also navigation keys in forms fields.
-	      Previously it directly closed the form except with --switch-buttons
-	      Request: https://bugs.freebsd.org/287592
+	* change: forms, ENTER is a also navigation keys in forms fields.
+	  Previously it directly closed the form except with --switch-buttons
+	  Request: https://bugs.freebsd.org/287592
 
 
 2024-07-01 Version 1.0.4
