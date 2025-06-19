@@ -27,6 +27,9 @@ next 1.0.5
 	      Rationale: see "115200 UART" problem above.
 	    * add: bsddialog_backtitle_rf() to print a top title refreshing the
 	      screen like bsddialog_backtitle() was previously.
+	    * change: forms, ENTER is also a navigation keys in forms fields.
+	      Request: https://bugs.freebsd.org/287592
+	      If conf.button.always_active is true the form is closes immediatly.
 
 	Library and implicitly utility:
 	    * fix: textbox buttons returned values (was always OK).
@@ -34,10 +37,12 @@ next 1.0.5
 	    * change: TAB is a navigation keys in forms. Previously it directly
 	      switched form-fields <-> buttons.
 	      Request: https://bugs.freebsd.org/287592
-	    * change: ENTER is a also navigation keys in forms fields with.
-	      Previously it directly closed the form.
+
+	Utility:
+	    * change: forms, ENTER is a also navigation keys in forms fields.
+	      Previously it directly closed the form except with --switch-buttons
 	      Request: https://bugs.freebsd.org/287592
-	      --switch-buttons
+
 
 2024-07-01 Version 1.0.4
 
