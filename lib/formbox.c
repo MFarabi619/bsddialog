@@ -719,10 +719,16 @@ bsddialog_form(struct bsddialog_conf *conf, const char *text, int rows,
 		switch(input) {
 		case KEY_ENTER:
 		case 10: /* Enter */
-			if (focusinform && conf->button.always_active == false)
-				break;
-			retval = BUTTONVALUE(d.bs);
-			loop = false;
+			if (focusinform && conf->button.always_active == false) {
+				next = nextitem(form.nitems, form.pritems, form.sel);
+				if (next > form.sel)
+					changeitem = true;
+				else
+					switchfocus = true;
+			} else {
+				retval = BUTTONVALUE(d.bs);
+				loop = false;
+			}
 			break;
 		case 27: /* Esc */
 			if (conf->key.enable_esc) {

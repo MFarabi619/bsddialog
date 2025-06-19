@@ -34,6 +34,10 @@ next 1.0.5
 	    * change: TAB is a navigation keys in forms. Previously it directly
 	      switched form-fields <-> buttons.
 	      Request: https://bugs.freebsd.org/287592
+	    * change: ENTER is a also navigation keys in forms fields with.
+	      Previously it directly closed the form.
+	      Request: https://bugs.freebsd.org/287592
+	      --switch-buttons
 
 2024-07-01 Version 1.0.4
 
