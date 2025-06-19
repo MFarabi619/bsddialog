@@ -31,7 +31,9 @@ next 1.0.5
 	Library and implicitly utility:
 	    * fix: textbox buttons returned values (was always OK).
 	      Thanks to https://reviews.freebsd.org/D48668.
-
+	    * change: TAB is a navigation keys in forms. Previously it directly
+	      switched form-fields <-> buttons.
+	      Request: https://bugs.freebsd.org/287592
 
 2024-07-01 Version 1.0.4
 

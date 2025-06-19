@@ -732,7 +732,12 @@ bsddialog_form(struct bsddialog_conf *conf, const char *text, int rows,
 			break;
 		case '\t': /* TAB */
 			if (focusinform) {
-				switchfocus = true;
+				next = nextitem(form.nitems, form.pritems,
+				    form.sel);
+				if (next > form.sel)
+					changeitem = true;
+				else
+					switchfocus = true;
 			} else {
 				if (d.bs.curr + 1 < (int)d.bs.nbuttons) {
 					d.bs.curr++;
@@ -885,6 +890,9 @@ bsddialog_form(struct bsddialog_conf *conf, const char *text, int rows,
 			    !focusinform);
 			wnoutrefresh(d.widget);
 			DRAWITEM_TRICK(&form, form.sel, focusinform);
+			/* form.sel = firstitem() for TAB navigation */
+			if (focusinform == false && form.sel != -1)
+				form.sel = firstitem(form.nitems, form.pritems);
 			switchfocus = false;
 		}
 
