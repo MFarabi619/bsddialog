@@ -722,7 +722,7 @@ bsddialog_form(struct bsddialog_conf *conf, const char *text, int rows,
 			if (focusinform && conf->button.always_active == false) {
 				next = nextitem(form.nitems, form.pritems, form.sel);
 				if (next > form.sel)
-					changeitem = true;
+					changeitem = true; /* needs next */
 				else
 					switchfocus = true;
 			} else {
@@ -741,7 +741,7 @@ bsddialog_form(struct bsddialog_conf *conf, const char *text, int rows,
 				next = nextitem(form.nitems, form.pritems,
 				    form.sel);
 				if (next > form.sel)
-					changeitem = true;
+					changeitem = true;  /* needs next */
 				else
 					switchfocus = true;
 			} else {
@@ -895,14 +895,20 @@ bsddialog_form(struct bsddialog_conf *conf, const char *text, int rows,
 			    conf->button.always_active || !focusinform,
 			    !focusinform);
 			wnoutrefresh(d.widget);
-			DRAWITEM_TRICK(&form, form.sel, focusinform);
-			/* form.sel = firstitem() for TAB navigation */
-			if (focusinform == false && form.sel != -1)
-				form.sel = firstitem(form.nitems, form.pritems);
+			if (focusinform == false)
+				DRAWITEM_TRICK(&form, form.sel, false);
+			else {
+				next = firstitem(form.nitems, form.pritems);
+				if (next == form.sel)
+					DRAWITEM_TRICK(&form, form.sel, true);
+				else
+					changeitem = true;
+			}
 			switchfocus = false;
 		}
 
 		if (changeitem) {
+			/* useless after if(switchfocus) */
 			DRAWITEM_TRICK(&form, form.sel, false);
 			form.sel = next;
 			item = &form.pritems[form.sel];
