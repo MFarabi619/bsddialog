@@ -11,6 +11,8 @@ next 1.0.5
 	* https://gitlab.com/alfix/bsddialog/-/merge_requests/5
 	  a call to curses' refresh() is performed, while a local
 	  variable is also called refresh.
+	* Makefiles: add install and uninstall targets (both GND and BSD)
+	  https://gitlab.com/alfix/bsddialog/-/merge_requests/3
 
 	MacOS (tested on amd64) refactoring, no function changes:
 	* https://gitlab.com/alfix/bsddialog/-/merge_requests/6
