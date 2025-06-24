@@ -143,7 +143,8 @@ enum OPTS {
 	TEXTBOX,
 	TIMEBOX,
 	TREEVIEW,
-	YESNO
+	YESNO,
+	SLIDER,
 };
 
 /* options descriptor */
@@ -268,6 +269,7 @@ static struct option longopts[] = {
 	{"timebox",      no_argument, NULL, TIMEBOX},
 	{"treeview",     no_argument, NULL, TREEVIEW},
 	{"yesno",        no_argument, NULL, YESNO},
+	{"slider",       no_argument, NULL, SLIDER},
 	/* END */
 	{ NULL, 0, NULL, 0}
 };
@@ -830,6 +832,10 @@ parseargs(int argc, char **argv, struct bsddialog_conf *conf,
 			opt->name = "--yesno";
 			opt->dialogbuilder = yesno_builder;
 			break;
+    case SLIDER:
+     opt->name = "--slider";
+     opt->dialogbuilder = slider_builder;
+     break;
 		default: /* Error */
 			if (opt->ignore == true)
 				break;
