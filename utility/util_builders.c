@@ -812,9 +812,9 @@ int passwordform_builder(BUILDER_ARGS)
 
 int slider_builder(BUILDER_ARGS)
 {
-  int i, j, output, nspaces, dynamic;
-  unsigned long length, start, end;
-  unsigned long **blocks;
+	int i, j, output, nspaces, dynamic;
+	unsigned long length, start, end;
+	unsigned long **blocks;
 
 	if (argc < 5) {
 		exit_error(true,
