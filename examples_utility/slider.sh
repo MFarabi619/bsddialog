@@ -14,7 +14,7 @@
 : ${BSDDIALOG_CANCEL=1}
 : ${BSDDIALOG_ESC=5}
 
-STARTEND=$(./bsddialog --slider slider 0 0 30000 5000 6000 1 2 \
+STARTEND=$(./bsddialog --slider slider 0 0 30000 5000 6000 1 \
   1000 3000 25000 30000 \
 3>&1 1>&2 2>&3 3>&-)
 

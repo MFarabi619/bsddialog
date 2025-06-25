@@ -812,38 +812,27 @@ int passwordform_builder(BUILDER_ARGS)
 
 int slider_builder(BUILDER_ARGS)
 {
-	int i, j, output, nspaces, dynamic;
+	int i, output, nspaces, dynamic;
 	unsigned long length, start, end;
 	unsigned long **blocks;
 
-	if (argc < 5) {
-		exit_error(true,
-		    "--slider requires: <lenght> <start> <end> <dynamic> <nspaces>");
-	}
-
-	nspaces = strtol(argv[4], NULL, 10);
-
-	if ((argc - 5) != (2 * nspaces)) {
-		exit_error(true,
-		    "spaces argument requires %d argument%s.",
-		    nspaces, nspaces > 1 ? "s" : "");
-	}
-
+	if (argc < 4)
+		exit_error(true, "--slider requires: <lenght> <start> <end> <dynamic>");
 	length = strtoul(argv[0], NULL, 10);
 	start = strtoul(argv[1], NULL, 10);
 	end = strtoul(argv[2], NULL, 10);
 	dynamic = strtoul(argv[3], NULL, 10);
 
+	argc -= 4;
+	argv += 4;
+	if (argc & 1)
+		exit_error(true, "bad [<start_block> <end_block> ...] number");
+	nspaces = argc / 2;
 	blocks = malloc(nspaces * sizeof(*blocks));
-
-	j = 0;
-	for (i = 5; i < (5 + (2 * nspaces)); i++) {
-		if (i % 2 == 1) {
-			blocks[j] = malloc(2 * sizeof(**blocks));
-			blocks[j][0] = strtoul(argv[i], NULL, 10);
-		} else {
-			blocks[j++][1] = strtoul(argv[i], NULL, 10);
-		}
+	for (i = 0; i < nspaces; i++) {
+		blocks[i] = malloc(2 * sizeof(**blocks));
+		blocks[i][0] = strtoul(argv[2 * i], NULL, 10);
+		blocks[i][1] = strtoul(argv[2 * i + 1], NULL, 10);
 	}
 
 	output = bsddialog_slider(conf, text, rows, cols, blocks, nspaces,
