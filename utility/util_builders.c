@@ -816,41 +816,45 @@ int slider_builder(BUILDER_ARGS)
   unsigned long length, start, end;
   unsigned long **blocks;
 
-  if (argc < 5) {
-    exit_error(true, "%s requires: <lenght> <start> <end> <dynamic> <nspaces> spaces...", opt->name);
-  }
+	if (argc < 5) {
+		exit_error(true,
+		    "%s requires: <lenght> <start> <end> <dynamic> <nspaces> spaces...",
+		    opt->name);
+	}
 
-  nspaces = strtol(argv[4], NULL, 10);
+	nspaces = strtol(argv[4], NULL, 10);
 
-  if ((argc - 5) != (2 * nspaces)) {
-    exit_error(true, "spaces argument requires %d argument%s.", nspaces, nspaces > 1 ? "s" : "");
-  }
+	if ((argc - 5) != (2 * nspaces)) {
+		exit_error(true,
+		    "spaces argument requires %d argument%s.",
+		    nspaces, nspaces > 1 ? "s" : "");
+	}
 
-  length = strtoul(argv[0], NULL, 10);
-  start = strtoul(argv[1], NULL, 10);
-  end = strtoul(argv[2], NULL, 10);
-  dynamic = strtoul(argv[3], NULL, 10);
+	length = strtoul(argv[0], NULL, 10);
+	start = strtoul(argv[1], NULL, 10);
+	end = strtoul(argv[2], NULL, 10);
+	dynamic = strtoul(argv[3], NULL, 10);
 
-  blocks = malloc(nspaces * sizeof(*blocks));
+	blocks = malloc(nspaces * sizeof(*blocks));
 
-  j = 0;
-  for (i = 5; i < (5 + (2 * nspaces)); i++) {
-    if (i % 2 == 1) {
-      blocks[j] = malloc(2 * sizeof(**blocks));
-      blocks[j][0] = strtoul(argv[i], NULL, 10);
-    } else {
-      blocks[j++][1] = strtoul(argv[i], NULL, 10);
-    }
-  }
+	j = 0;
+	for (i = 5; i < (5 + (2 * nspaces)); i++) {
+		if (i % 2 == 1) {
+			blocks[j] = malloc(2 * sizeof(**blocks));
+			blocks[j][0] = strtoul(argv[i], NULL, 10);
+		} else {
+			blocks[j++][1] = strtoul(argv[i], NULL, 10);
+		}
+	}
 
-  output = bsddialog_slider(conf, text, rows, cols, blocks, nspaces, length, &start, &end, dynamic);
-  for (i = 0; i < nspaces; i++) {
-    free(blocks[i]);
-  }
-  free(blocks);
+	output = bsddialog_slider(conf, text, rows, cols, blocks, nspaces,
+	    length, &start, &end, dynamic);
+	for (i = 0; i < nspaces; i++)
+		free(blocks[i]);
+	free(blocks);
 
 	if (output != BSDDIALOG_ERROR)
 		dprintf(opt->output_fd, "%lu %lu", start, end);
 
-  return (output);
+	return (output);
 }
