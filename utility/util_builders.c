@@ -828,9 +828,11 @@ int slider_builder(BUILDER_ARGS)
 	if (argc & 1)
 		exit_error(true, "bad [<start_block> <end_block> ...] number");
 	nspaces = argc / 2;
-	blocks = malloc(nspaces * sizeof(*blocks));
+	if ((blocks = malloc(nspaces * sizeof(*blocks))) == NULL)
+		exit_error(false, "Cannot allocate memory for blocks");
 	for (i = 0; i < nspaces; i++) {
-		blocks[i] = malloc(2 * sizeof(**blocks));
+		if ((blocks[i] = malloc(2 * sizeof(**blocks))) == NULL)
+			exit_error(false, "Cannot allocate memory for blocks");
 		blocks[i][0] = strtoul(argv[2 * i], NULL, 10);
 		blocks[i][1] = strtoul(argv[2 * i + 1], NULL, 10);
 	}
