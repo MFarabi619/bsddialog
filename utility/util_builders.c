@@ -816,9 +816,6 @@ int slider_builder(BUILDER_ARGS)
   unsigned long length, start, end;
   unsigned long **blocks;
 
-  j = 0;
-  length = 50000;
-
   if (argc < 5) {
     exit_error(true, "%s requires: <lenght> <start> <end> <dynamic> <nspaces> spaces...", opt->name);
   }
@@ -836,6 +833,7 @@ int slider_builder(BUILDER_ARGS)
 
   blocks = malloc(nspaces * sizeof(*blocks));
 
+  j = 0;
   for (i = 5; i < (5 + (2 * nspaces)); i++) {
     if (i % 2 == 1) {
       blocks[j] = malloc(2 * sizeof(**blocks));
