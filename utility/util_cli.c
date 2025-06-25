@@ -265,11 +265,11 @@ static struct option longopts[] = {
 	{"pause",        no_argument, NULL, PAUSE},
 	{"radiolist",    no_argument, NULL, RADIOLIST},
 	{"rangebox",     no_argument, NULL, RANGEBOX},
+	{"slider",       no_argument, NULL, SLIDER},
 	{"textbox",      no_argument, NULL, TEXTBOX},
 	{"timebox",      no_argument, NULL, TIMEBOX},
 	{"treeview",     no_argument, NULL, TREEVIEW},
 	{"yesno",        no_argument, NULL, YESNO},
-	{"slider",       no_argument, NULL, SLIDER},
 	/* END */
 	{ NULL, 0, NULL, 0}
 };
@@ -803,6 +803,13 @@ parseargs(int argc, char **argv, struct bsddialog_conf *conf,
 			opt->name = "--rangebox";
 			opt->dialogbuilder = rangebox_builder;
 			break;
+		case SLIDER:
+			if (opt->dialogbuilder != NULL)
+				exit_error(true, "%s and --slider without "
+				    "--and-dialog", opt->name);
+			opt->name = "--slider";
+			opt->dialogbuilder = slider_builder;
+			break;
 		case TEXTBOX:
 			if (opt->dialogbuilder != NULL)
 				exit_error(true, "%s and --textbox without "
@@ -832,10 +839,6 @@ parseargs(int argc, char **argv, struct bsddialog_conf *conf,
 			opt->name = "--yesno";
 			opt->dialogbuilder = yesno_builder;
 			break;
-    case SLIDER:
-     opt->name = "--slider";
-     opt->dialogbuilder = slider_builder;
-     break;
 		default: /* Error */
 			if (opt->ignore == true)
 				break;
