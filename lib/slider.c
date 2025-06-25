@@ -287,6 +287,7 @@ slider_draw(struct dialog *d, bool redraw, WINDOW *start_win, WINDOW *end_win,
 	return (0);
 }
 
+/* API */
 int
 bsddialog_slider(struct bsddialog_conf *conf, const char *text, int rows,
     int cols, unsigned long *spaces[2], int nspaces, unsigned long length,
