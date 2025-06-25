@@ -64,12 +64,12 @@ struct sliderctl {
 	unsigned long step;
 };
 
-int crashes(long x, long y, long a, long b)
+static int crashes(long x, long y, long a, long b)
 {
 	return ((x <= a && a <= y) || (x <= b && b <= y));
 }
 
-int fits(long x, long y, long a, long b)
+static int fits(long x, long y, long a, long b)
 {
 	return ((x <= a) && (b <= y));
 }
