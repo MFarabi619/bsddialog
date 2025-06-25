@@ -818,8 +818,7 @@ int slider_builder(BUILDER_ARGS)
 
 	if (argc < 5) {
 		exit_error(true,
-		    "%s requires: <lenght> <start> <end> <dynamic> <nspaces> spaces...",
-		    opt->name);
+		    "--slider requires: <lenght> <start> <end> <dynamic> <nspaces>");
 	}
 
 	nspaces = strtol(argv[4], NULL, 10);
