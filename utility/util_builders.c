@@ -851,5 +851,8 @@ int slider_builder(BUILDER_ARGS)
   }
   free(blocks);
 
+	if (output != BSDDIALOG_ERROR)
+		dprintf(opt->output_fd, "%lu %lu", start, end);
+
   return (output);
 }
