@@ -815,8 +815,7 @@ int slider_builder(BUILDER_ARGS)
 	bool resize;
 	int output;
 	unsigned int i, nblocks;
-	unsigned long length, start, end;
-	unsigned long (*blocks)[2];
+	unsigned long length, start, end, (*blocks)[2];
 
 	if (argc < 4)
 		exit_error(true, "--slider requires: <lenght> <start> <end> <resize>");
