@@ -57,7 +57,7 @@ enum operation {
 struct sliderctl {
 	enum operation op;
 	unsigned long (*spaces)[2];
-	unsigned int nspaces;
+	int nspaces; /* api unsigned, but segfault handlesliderctl():MOVELEFT */
 	unsigned long length;
 	unsigned long *start;
 	unsigned long *end;
@@ -76,8 +76,7 @@ static int fits(long x, long y, long a, long b)
 
 static void handlesliderctl(struct sliderctl *sliderctl)
 {
-	int step;
-	unsigned int i;
+	int i, step;
 	unsigned long x, y, size, old_start, old_end;
 	signed long new_start, new_end;
 
