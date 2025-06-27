@@ -812,35 +812,33 @@ int passwordform_builder(BUILDER_ARGS)
 
 int slider_builder(BUILDER_ARGS)
 {
-	int i, output, nspaces, dynamic;
+	bool resize;
+	int output;
+	unsigned int i, nblocks;
 	unsigned long length, start, end;
-	unsigned long **blocks;
+	unsigned long (*blocks)[2];
 
 	if (argc < 4)
-		exit_error(true, "--slider requires: <lenght> <start> <end> <dynamic>");
+		exit_error(true, "--slider requires: <lenght> <start> <end> <resize>");
 	length = strtoul(argv[0], NULL, 10);
 	start = strtoul(argv[1], NULL, 10);
 	end = strtoul(argv[2], NULL, 10);
-	dynamic = strtoul(argv[3], NULL, 10);
+	resize = strtoul(argv[3], NULL, 10) == 0 ? false : true;
 
 	argc -= 4;
 	argv += 4;
 	if (argc & 1)
 		exit_error(true, "bad [<start_block> <end_block> ...] number");
-	nspaces = argc / 2;
-	if ((blocks = malloc(nspaces * sizeof(*blocks))) == NULL)
+	nblocks = argc / 2;
+	if ((blocks = malloc(nblocks * sizeof(*blocks))) == NULL)
 		exit_error(false, "Cannot allocate memory for blocks");
-	for (i = 0; i < nspaces; i++) {
-		if ((blocks[i] = malloc(2 * sizeof(**blocks))) == NULL)
-			exit_error(false, "Cannot allocate memory for blocks");
+	for (i = 0; i < nblocks; i++) {
 		blocks[i][0] = strtoul(argv[2 * i], NULL, 10);
 		blocks[i][1] = strtoul(argv[2 * i + 1], NULL, 10);
 	}
 
-	output = bsddialog_slider(conf, text, rows, cols, blocks, nspaces,
-	    length, &start, &end, dynamic);
-	for (i = 0; i < nspaces; i++)
-		free(blocks[i]);
+	output = bsddialog_slider(conf, text, rows, cols, length, &start, &end,
+	    resize, nblocks, blocks);
 	free(blocks);
 
 	if (output != BSDDIALOG_ERROR)

@@ -56,8 +56,8 @@ enum operation {
 
 struct sliderctl {
 	enum operation op;
-	unsigned long **spaces;
-	int nspaces;
+	unsigned long (*spaces)[2];
+	unsigned int nspaces;
 	unsigned long length;
 	unsigned long *start;
 	unsigned long *end;
@@ -76,7 +76,8 @@ static int fits(long x, long y, long a, long b)
 
 static void handlesliderctl(struct sliderctl *sliderctl)
 {
-	int step, i;
+	int step;
+	unsigned int i;
 	unsigned long x, y, size, old_start, old_end;
 	signed long new_start, new_end;
 
@@ -202,9 +203,9 @@ drawsquare(struct bsddialog_conf *conf, WINDOW *win, enum elevation elev,
 }
 
 static void
-print_slider(struct bsddialog_conf *conf, WINDOW *win, unsigned long *spaces[2],
-    int nspaces, unsigned long length, unsigned long *start, unsigned long *end,
-    bool active)
+print_slider(struct bsddialog_conf *conf, WINDOW *win,
+    unsigned long spaces[][2], int nspaces, unsigned long length,
+    unsigned long *start, unsigned long *end, bool active)
 {
 	int i, y, x, l, height, width;
 	unsigned long s, e;
@@ -290,8 +291,8 @@ slider_draw(struct dialog *d, bool redraw, WINDOW *start_win, WINDOW *end_win,
 /* API */
 int
 bsddialog_slider(struct bsddialog_conf *conf, const char *text, int rows,
-    int cols, unsigned long *spaces[2], int nspaces, unsigned long length,
-    unsigned long *start, unsigned long *end, int dynamic) 
+    int cols, unsigned long length, unsigned long *start, unsigned long *end,
+    bool resize, unsigned int nblocks, unsigned long blocks[][2])
 {
 	struct sliderctl ctl;
 	bool loop, focusbuttons;
@@ -303,8 +304,8 @@ bsddialog_slider(struct bsddialog_conf *conf, const char *text, int rows,
 	CHECK_PTR(start);
 	CHECK_PTR(end);
 
-	ctl.spaces = spaces;
-	ctl.nspaces = nspaces;
+	ctl.spaces = blocks;
+	ctl.nspaces = nblocks;
 	ctl.length = length;
 	ctl.start = start;
 	ctl.end = end;
@@ -342,7 +343,7 @@ bsddialog_slider(struct bsddialog_conf *conf, const char *text, int rows,
 		drawsquare(conf, end_win, RAISED, "%15lu", end, sel == END_WIN);
 		drawsquare(conf, step_win, RAISED, "%15d", &ctl.step,
 		    sel == STEP_WIN);
-		print_slider(conf, slider_win, spaces, nspaces, length, start,
+		print_slider(conf, slider_win, blocks, nblocks, length, start,
 		    end, sel == SLIDER_WIN);
 		doupdate();
 
@@ -429,14 +430,14 @@ bsddialog_slider(struct bsddialog_conf *conf, const char *text, int rows,
 				     conf->button.always_active ? 0 : -1;
 				DRAW_BUTTONS(dialog);
 			} else if (sel == START_WIN) {
-				if (dynamic == 1) {
+				if (resize) {
 					ctl.op = INCREASELEFT;
 				} else {
 					ctl.op = MOVERIGHT;
 				}
 				handlesliderctl(&ctl);
 			} else if (sel == END_WIN) {
-				if (dynamic == 1) {
+				if (resize) {
 					ctl.op = INCREASERIGHT;
 				} else {
 					ctl.op = MOVERIGHT;
@@ -451,14 +452,14 @@ bsddialog_slider(struct bsddialog_conf *conf, const char *text, int rows,
 			if (focusbuttons) {
 				break;
 			} else if (sel == START_WIN) {
-				if (dynamic == 1) {
+				if (resize) {
 					ctl.op = DECREASELEFT;
 				} else {
 					ctl.op = MOVELEFT;
 				}
 				handlesliderctl(&ctl);
 			} else if (sel == END_WIN) {
-				if (dynamic == 1) {
+				if (resize) {
 					ctl.op = DECREASERIGHT;
 				} else {
 					ctl.op = MOVELEFT;
@@ -473,14 +474,14 @@ bsddialog_slider(struct bsddialog_conf *conf, const char *text, int rows,
 			if (focusbuttons) {
 				break;
 			} else if (sel == START_WIN) {
-				if (dynamic == 1) {
+				if (resize) {
 					ctl.op = DECREASELEFT;
 				} else {
 					ctl.op = MOVELEFT;
 				}
 				handlesliderctl(&ctl);
 			} else if (sel == END_WIN) {
-				if (dynamic == 1) {
+				if (resize) {
 					ctl.op = DECREASERIGHT;
 				} else {
 					ctl.op = MOVELEFT;
@@ -495,14 +496,14 @@ bsddialog_slider(struct bsddialog_conf *conf, const char *text, int rows,
 			if (focusbuttons) {
 				break;
 			} else if (sel == START_WIN) {
-				if (dynamic == 1) {
+				if (resize) {
 					ctl.op = INCREASELEFT;
 				} else {
 					ctl.op = MOVERIGHT;
 				}
 				handlesliderctl(&ctl);
 			} else if (sel == END_WIN) {
-				if (dynamic == 1) {
+				if (resize) {
 					ctl.op = INCREASERIGHT;
 				} else {
 					ctl.op = MOVERIGHT;
