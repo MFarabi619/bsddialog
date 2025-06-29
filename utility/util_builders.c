@@ -814,18 +814,20 @@ int slider_builder(BUILDER_ARGS)
 {
 	bool resize;
 	int output;
+  char *unit;
 	unsigned int i, nblocks;
 	unsigned long length, start, end, (*blocks)[2];
 
-	if (argc < 4)
-		exit_error(true, "--slider requires: <lenght> <start> <end> <resize>");
-	length = strtoul(argv[0], NULL, 10);
-	start = strtoul(argv[1], NULL, 10);
-	end = strtoul(argv[2], NULL, 10);
-	resize = strtoul(argv[3], NULL, 10) == 0 ? false : true;
+	if (argc < 5)
+		exit_error(true, "--slider requires: <unit> <lenght> <start> <end> <resize>");
+  unit = argv[0];
+	length = strtoul(argv[1], NULL, 10);
+	start = strtoul(argv[2], NULL, 10);
+	end = strtoul(argv[3], NULL, 10);
+	resize = strtoul(argv[4], NULL, 10) == 0 ? false : true;
 
-	argc -= 4;
-	argv += 4;
+	argc -= 5;
+	argv += 5;
 	if (argc & 1)
 		exit_error(true, "bad [<start_block> <end_block> ...] number");
 	nblocks = argc / 2;
@@ -836,7 +838,7 @@ int slider_builder(BUILDER_ARGS)
 		blocks[i][1] = strtoul(argv[2 * i + 1], NULL, 10);
 	}
 
-	output = bsddialog_slider(conf, text, rows, cols, length, &start, &end,
+	output = bsddialog_slider(conf, text, rows, cols, unit, length, &start, &end,
 	    resize, nblocks, blocks);
 	free(blocks);
 
