@@ -246,8 +246,9 @@ bsddialog_rangebox(struct bsddialog_conf *conf, const char *text, int rows,
 
 int
 bsddialog_slider(struct bsddialog_conf *conf, const char *text, int rows,
-    int cols, unsigned long length, unsigned long *start, unsigned long *end,
-    bool resize, unsigned int nblocks, unsigned long blocks[][2]);
+    int cols, const char *unit, unsigned long length, unsigned long *start,
+    unsigned long *end, bool resize, unsigned int nblocks,
+    unsigned long blocks[][2]);
 
 int
 bsddialog_textbox(struct bsddialog_conf *conf, const char *file, int rows,
