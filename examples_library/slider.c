@@ -31,8 +31,8 @@ int main()
 	bsddialog_initconf(&conf);
 	conf.title = "slider";
 
-	output = bsddialog_slider(&conf, "Example", 0, 0, 100, &start, &end,
-	    false, 2, blocks);
+	output = bsddialog_slider(&conf, "Example", 0, 0, "GiB", 100, &start,
+	    &end, false, 2, blocks);
 	bsddialog_end();
 	if (output == BSDDIALOG_ERROR) {
 		printf("Error: %s\n", bsddialog_geterror());
