@@ -30,7 +30,7 @@
 
 #include <stdbool.h>
 
-#define LIBBSDDIALOG_VERSION     "1.0.5"
+#define LIBBSDDIALOG_VERSION     "1.1"
 
 /* Return values */
 #define BSDDIALOG_ERROR          -1
