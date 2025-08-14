@@ -45,11 +45,11 @@
 
 enum operation {
 	MOVERIGHT,
-  MOVEFARRIGHT,
-  MOVEFASTRIGHT,
+	MOVEFARRIGHT,
+	MOVEFASTRIGHT,
 	MOVELEFT,
-  MOVEFARLEFT,
-  MOVEFASTLEFT,
+	MOVEFARLEFT,
+	MOVEFASTLEFT,
 	INCREASELEFT,
 	DECREASELEFT,
 	INCREASERIGHT,
@@ -152,10 +152,10 @@ static void handlesliderctl(struct sliderctl *sliderctl)
 	case DECREASERIGHT:
 		new_end = old_end - step;
 		break;
-  case MOVEFARLEFT:
-    new_start = 0;
-    new_end = size - 1;
-    for (i = 0; i < sliderctl->nspaces; i++) {
+	case MOVEFARLEFT:
+		new_start = 0;
+		new_end = size - 1;
+		for (i = 0; i < sliderctl->nspaces; i++) {
 			x = (sliderctl->spaces)[i][0];
 			y = (sliderctl->spaces)[i][1];
 
@@ -165,11 +165,11 @@ static void handlesliderctl(struct sliderctl *sliderctl)
 				break;
 			}
 		}
-    break;
-  case MOVEFARRIGHT:
-    new_end = (sliderctl->length) - 1;
-    new_start = new_end - size + 1;
-    for (i = sliderctl->nspaces - 1; i >= 0; i--) {
+		break;
+	case MOVEFARRIGHT:
+		new_end = (sliderctl->length) - 1;
+		new_start = new_end - size + 1;
+		for (i = sliderctl->nspaces - 1; i >= 0; i--) {
 			x = (sliderctl->spaces)[i][0];
 			y = (sliderctl->spaces)[i][1];
 
@@ -179,14 +179,14 @@ static void handlesliderctl(struct sliderctl *sliderctl)
 				break;
 			}
 		}
-    break;
-  case MOVEFASTLEFT:
-    if (size < 10) {
-      tmpstep = 1;
-    } else {
-      tmpstep = ((sliderctl->length) * 10) / 100;
-    }
-    new_start = old_start - tmpstep;
+		break;
+	case MOVEFASTLEFT:
+		if (size < 10) {
+			tmpstep = 1;
+		} else {
+			tmpstep = ((sliderctl->length) * 10) / 100;
+		}
+		new_start = old_start - tmpstep;
 		new_end = old_end - tmpstep; 
 
 		for (i = sliderctl->nspaces - 1; i >= 0; i--) {
@@ -199,14 +199,14 @@ static void handlesliderctl(struct sliderctl *sliderctl)
 				break;
 			}
 		}
-    break;
-  case MOVEFASTRIGHT:
-    if (size < 10) {
-      tmpstep = 1;
-    } else {
-      tmpstep = ((sliderctl->length) * 10) / 100;
-    }
-    new_start = old_start + tmpstep;
+		break;
+	case MOVEFASTRIGHT:
+		if (size < 10) {
+			tmpstep = 1;
+		} else {
+			tmpstep = ((sliderctl->length) * 10) / 100;
+		}
+		new_start = old_start + tmpstep;
 		new_end = old_end + tmpstep;
 
 		for (i = 0; i < sliderctl->nspaces; i++) {
@@ -330,7 +330,7 @@ static int
 slider_draw(struct dialog *d, bool redraw, WINDOW *start_win, WINDOW *end_win,
     WINDOW *size_win, WINDOW *step_win, WINDOW *slider_win, const char *unit)
 {
-  char *buf;
+	char *buf;
 	int yslider, xslider;
 
 	if (redraw) {
@@ -347,21 +347,21 @@ slider_draw(struct dialog *d, bool redraw, WINDOW *start_win, WINDOW *end_win,
 
 	yslider = d->y + d->h - 15;
 	xslider = d->x + d->w / 2 - 17;
-  asprintf(&buf, "Start (%s)", unit);
+	asprintf(&buf, "Start (%s)", unit);
 	mvwaddstr(d->widget, d->h - 16, d->w / 2 - 17, buf);
-  free(buf);
+	free(buf);
 	update_box(d->conf, start_win, yslider, xslider, 3, 17, RAISED);
-  asprintf(&buf, "End (%s)", unit);
+	asprintf(&buf, "End (%s)", unit);
 	mvwaddstr(d->widget, d->h - 16, d->w / 2, buf);
-  free(buf);
+	free(buf);
 	update_box(d->conf, end_win, yslider, xslider + 17, 3, 17, RAISED);
-  asprintf(&buf, "Size (%s)", unit);
-  mvwaddstr(d->widget, d->h - 12, d->w / 2 - 17, buf);
-  free(buf);
+	asprintf(&buf, "Size (%s)", unit);
+	mvwaddstr(d->widget, d->h - 12, d->w / 2 - 17, buf);
+	free(buf);
 	update_box(d->conf, size_win, yslider + 4, xslider, 3, 17, RAISED);
-  asprintf(&buf, "Step (%s)", unit);
+	asprintf(&buf, "Step (%s)", unit);
 	mvwaddstr(d->widget, d->h - 12, d->w / 2, buf);
-  free(buf);
+	free(buf);
 	update_box(d->conf, step_win, yslider + 4, xslider + 17, 3, 17, RAISED);
 
 	update_box(d->conf, slider_win, yslider + 7, xslider, 3, 34, RAISED);
@@ -381,7 +381,7 @@ bsddialog_slider(struct bsddialog_conf *conf, const char *text, int rows,
 	bool loop, focusbuttons;
 	int retval, sel;
 	wint_t input;
-  unsigned long size;
+	unsigned long size;
 	WINDOW *start_win, *end_win, *size_win, *step_win, *slider_win;
 	struct dialog dialog;
 
@@ -411,7 +411,7 @@ bsddialog_slider(struct bsddialog_conf *conf, const char *text, int rows,
 		RETURN_ERROR("Cannot build WINDOW for step");
 	wbkgd(step_win, t.dialog.color);
 
-  if ((size_win = newwin(1, 1, 1, 1)) == NULL)
+	if ((size_win = newwin(1, 1, 1, 1)) == NULL)
 		RETURN_ERROR("Cannot build WINDOW for size");
 	wbkgd(size_win, t.dialog.color);
 
@@ -426,7 +426,7 @@ bsddialog_slider(struct bsddialog_conf *conf, const char *text, int rows,
 	sel = NULLWIN;
 	loop = focusbuttons = true;
 	while (loop) {
-    size = *(ctl.end) - *(ctl.start) + 1;
+		size = *(ctl.end) - *(ctl.start) + 1;
 		drawsquare(conf, start_win, RAISED, sel == START_WIN, "%15lu", *start); 
 		drawsquare(conf, end_win, RAISED, sel == END_WIN, "%15lu", *end);
 		drawsquare(conf, size_win, RAISED, 0, "%15lu", size);
@@ -602,38 +602,38 @@ bsddialog_slider(struct bsddialog_conf *conf, const char *text, int rows,
 				handlesliderctl(&ctl);
 			}
 			break;
-    case KEY_HOME:
-      if (focusbuttons) {
-        break;
-      } else if (sel == SLIDER_WIN) {
-        ctl.op = MOVEFARLEFT;
-        handlesliderctl(&ctl);
-      }
-      break;
-    case KEY_END:
-      if (focusbuttons) {
-        break;
-      } else if (sel == SLIDER_WIN) {
-        ctl.op = MOVEFARRIGHT;
-        handlesliderctl(&ctl);
-      }
-      break;
-    case KEY_PPAGE:
-      if (focusbuttons) {
-        break;
-      } else if (sel == SLIDER_WIN) {
-        ctl.op = MOVEFASTLEFT;
-        handlesliderctl(&ctl);
-      }
-      break;
-    case KEY_NPAGE:
-      if (focusbuttons) {
-        break;
-      } else if (sel == SLIDER_WIN) {
-        ctl.op = MOVEFASTRIGHT;
-        handlesliderctl(&ctl);
-      }
-      break;
+		case KEY_HOME:
+			if (focusbuttons) {
+				break;
+			} else if (sel == SLIDER_WIN) {
+				ctl.op = MOVEFARLEFT;
+				handlesliderctl(&ctl);
+			}
+			break;
+		case KEY_END:
+			if (focusbuttons) {
+				break;
+			} else if (sel == SLIDER_WIN) {
+				ctl.op = MOVEFARRIGHT;
+				handlesliderctl(&ctl);
+			}
+			break;
+		case KEY_PPAGE:
+			if (focusbuttons) {
+				break;
+			} else if (sel == SLIDER_WIN) {
+				ctl.op = MOVEFASTLEFT;
+				handlesliderctl(&ctl);
+			}
+			break;
+		case KEY_NPAGE:
+			if (focusbuttons) {
+				break;
+			} else if (sel == SLIDER_WIN) {
+				ctl.op = MOVEFASTRIGHT;
+				handlesliderctl(&ctl);
+			}
+			break;
 		case KEY_F(1):
 			if (conf->key.f1_file == NULL &&
 			    conf->key.f1_message == NULL)
