@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: CC0-1.0
+#
+# Portions of this software were developed under sponsorship
+# from the FreeBSD Foundation
+image: gcc
+build:
+  stage: build
+  script:
+    - make
+  artifacts:
+    paths:
+      - utility/bsddialog
