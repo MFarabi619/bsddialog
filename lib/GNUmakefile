@@ -15,7 +15,7 @@ ifneq ($(ENABLEDEBUG),)
 CFLAGS += -g
 endif
 CFLAGS += -D_XOPEN_SOURCE_EXTENDED -D_XOPEN_SOURCE -D_GNU_SOURCE \
-	-Wall -Wextra -Werror -fpic
+	-I/usr/include/ncursesw -Wall -Wextra -Werror -fpic
 LDFLAGS += -lncursesw -ltinfo
 LIBFLAG = -shared
 
