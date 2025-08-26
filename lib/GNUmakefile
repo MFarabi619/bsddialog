@@ -7,7 +7,7 @@ LIBRARY = bsddialog
 LIBRARY_SO = lib${LIBRARY:=.so}
 HEADERS = bsddialog.h bsddialog_theme.h bsddialog_progressview.h
 SOURCES = barbox.c datebox.c formbox.c libbsddialog.c lib_util.c \
-	menubox.c messagebox.c textbox.c theme.c timebox.c
+	menubox.c messagebox.c slider.c textbox.c theme.c timebox.c
 OBJECTS = $(SOURCES:.c=.o)
 PREFIX = /usr/local
 
@@ -15,7 +15,7 @@ ifneq ($(ENABLEDEBUG),)
 CFLAGS += -g
 endif
 CFLAGS += -D_XOPEN_SOURCE_EXTENDED -D_XOPEN_SOURCE -D_GNU_SOURCE \
-	-Wall -Wextra -Werror -fpic
+	-I/usr/include/ncursesw -Wall -Wextra -Werror -fpic
 LDFLAGS += -lncursesw -ltinfo
 LIBFLAG = -shared
 
