@@ -2,11 +2,23 @@
 #
 # Portions of this software were developed under sponsorship
 # from the FreeBSD Foundation
-image: gcc
 build:
   stage: build
+  image: gcc
   script:
     - make
   artifacts:
     paths:
       - utility/bsddialog
+
+build-alpine:
+    stage: build
+    image: alpine:latest
+    script:
+      - apk update; apk add ncurses-dev gcc clang20 make
+      - make
+      - make clean
+      - CC=clang make
+    artifacts:
+      paths:
+        - utility/bsddialog
