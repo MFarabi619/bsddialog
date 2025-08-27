@@ -429,7 +429,7 @@ parseargs(int argc, char **argv, struct bsddialog_conf *conf,
 			break;
 		case COLUMNS_PER_ROW:
 			conf->text.cols_per_row =
-			    (u_int)strtoul(optarg, NULL, 10);
+			    (unsigned int)strtoul(optarg, NULL, 10);
 			break;
 		case CR_WRAP:
 			opt->cr_wrap = true;
@@ -549,7 +549,7 @@ parseargs(int argc, char **argv, struct bsddialog_conf *conf,
 			opt->loadthemefile = optarg;
 			break;
 		case MAX_INPUT_FORM:
-			opt->max_input_form = (u_int)strtoul(optarg, NULL, 10);
+			opt->max_input_form = (unsigned int)strtoul(optarg, NULL, 10);
 			break;
 		case NO_CANCEL:
 			conf->button.without_cancel = true;
@@ -638,7 +638,7 @@ parseargs(int argc, char **argv, struct bsddialog_conf *conf,
 			opt->item_singlequote = true;
 			break;
 		case SLEEP:
-			conf->sleep = (u_int)strtoul(optarg, NULL, 10);
+			conf->sleep = (unsigned int)strtoul(optarg, NULL, 10);
 			break;
 		case STDERR:
 			opt->output_fd = STDERR_FILENO;
@@ -653,7 +653,7 @@ parseargs(int argc, char **argv, struct bsddialog_conf *conf,
 			opt->tab_escape = true;
 			break;
 		case TAB_LEN:
-			conf->text.tablen = (u_int)strtoul(optarg, NULL, 10);
+			conf->text.tablen = (unsigned int)strtoul(optarg, NULL, 10);
 			break;
 		case TEXT_ESCAPE:
 			conf->text.escape = true;
