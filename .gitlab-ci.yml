@@ -22,3 +22,13 @@ build-alpine:
     artifacts:
       paths:
         - utility/bsddialog
+
+build-fedora:
+    stage: build
+    image: fedora:latest
+    script:
+      - dnf update --quiet --assumeyes; dnf install --quiet --assumeyes ncurses-devel gcc
+      - make
+    artifacts:
+      paths:
+        - utility/bsddialog
