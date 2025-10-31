@@ -187,7 +187,7 @@ static void handlesliderctl(struct sliderctl *sliderctl)
 			tmpstep = ((sliderctl->length) * 10) / 100;
 		}
 		new_start = old_start - tmpstep;
-		new_end = old_end - tmpstep; 
+		new_end = old_end - tmpstep;
 
 		for (i = sliderctl->nspaces - 1; i >= 0; i--) {
 			x = (sliderctl->spaces)[i][0];
