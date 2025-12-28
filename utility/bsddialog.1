@@ -22,7 +22,7 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.Dd June 24, 2025
+.Dd December 28, 2025
 .Dt BSDDIALOG 1
 .Os
 .Sh NAME
@@ -944,6 +944,14 @@ Dialogs:
 .Pp
 Some feature differs in input, output, or behavior.
 Compatibility is not a priority for future development.
+.Sh CAVEATS
+.Xr xargs 1
+requires the
+.Fl o
+option when used with interactive dialogs; otherwise, the dialog may become
+unresponsive.
+For example:
+.Dl echo 'a b off' | xargs -o bsddialog --checklist example 0 0 0
 .Sh THANKS TO
 .An Baptiste Daroussin
 .Aq Mt bapt@FreeBSD.org ,
