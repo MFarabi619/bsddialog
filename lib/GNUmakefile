@@ -19,6 +19,7 @@ CFLAGS += -D_XOPEN_SOURCE_EXTENDED -D_XOPEN_SOURCE -D_GNU_SOURCE \
 LDFLAGS += -lncursesw -ltinfo
 LIBFLAG = -shared
 
+INSTALL = install
 RM = rm -f
 LN = ln -s -f
 

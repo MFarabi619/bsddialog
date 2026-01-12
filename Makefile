@@ -25,6 +25,7 @@ export ENABLEDEBUG=${DEBUG}
 all: ${OUTPUT}
 
 install: all
+	echo ${INSTALL}
 	${MAKE} -C ${LIBPATH} install
 	${MAKE} -C ${UTILITYPATH} install
 

@@ -5,6 +5,8 @@ Next
 	  Thanks to https://gitlab.com/alfix/bsddialog/-/merge_requests/9
 	* add: Gitlab CI file for runnig CI tests with Linux.
 	  Thanks to https://gitlab.com/alfix/bsddialog/-/merge_requests/10
+	* fix: $INSTALL.
+	  https://gitlab.com/alfix/bsddialog/-/issues/10
 
 2025-08-15 Version 1.1
 

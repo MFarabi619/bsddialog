@@ -21,6 +21,7 @@ LDFLAGS += -fstack-protector-strong -shared -Wl,-x -Wl,--fatal-warnings \
 	-Wl,--warn-shared-textrel -Wl,-soname,${LIBRARY_SO}.${VERSION} \
 	-L/usr/lib -lncursesw -ltinfow
 
+INSTALL = install
 LN = ln -s -f
 RM = rm -f
 

@@ -19,6 +19,7 @@ else
 LDFLAGS += -ltinfo -Wl,-rpath=$(LIBPATH) -L$(LIBPATH) -lbsddialog
 endif
 
+INSTALL = install
 RM = rm -f
 
 all: $(OUTPUT)
