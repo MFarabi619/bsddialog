@@ -25,10 +25,10 @@ RM = rm -f
 all: $(OUTPUT)
 
 install: all
-	${INSTALL} -m 0755 ${OUTPUT} ${DESTDIR}${PREFIX}/bin/${OUTPUT}
+	$(INSTALL) -m 0755 $(OUTPUT) $(DESTDIR)$(PREFIX)/bin/$(OUTPUT)
 
 uninstall:
-	${RM} ${DESTDIR}${PREFIX}/bin/${OUTPUT}
+	$(RM) $(DESTDIR)$(PREFIX)/bin/$(OUTPUT)
 
 $(OUTPUT): $(OBJECTS)
 	$(CC) $^ -o $@ $(LDFLAGS)
