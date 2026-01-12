@@ -18,7 +18,7 @@ build-alpine:
       - apk update; apk add ncurses-dev gcc clang20 make
       - make
       - make clean
-      - CC=clang make
+      - CC=clang-20 make
     artifacts:
       paths:
         - utility/bsddialog
