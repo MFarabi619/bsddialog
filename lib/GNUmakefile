@@ -31,6 +31,7 @@ install: all
 	$(INSTALL) -m 0644 bsddialog_theme.h $(DESTDIR)$(PREFIX)/include/bsddialog_theme.h
 	$(INSTALL) -m 0755 $(LIBRARY_SO).$(VERSION) $(DESTDIR)$(PREFIX)/lib/$(LIBRARY_SO).$(VERSION)
 	$(LN) $(LIBRARY_SO).$(VERSION) $(DESTDIR)$(PREFIX)/lib/$(LIBRARY_SO)
+	$(INSTALL) -m 0644 bsddialog.3 $(DESTDIR)$(PREFIX)/man1/bsddialog.3
 
 uninstall:
 	$(RM) $(DESTDIR)$(PREFIX)/include/bsddialog.h
@@ -38,6 +39,7 @@ uninstall:
 	$(RM) $(DESTDIR)$(PREFIX)/include/bsddialog_theme.h
 	$(RM) $(DESTDIR)$(PREFIX)/lib/$(LIBRARY_SO).$(VERSION)
 	$(RM) $(DESTDIR)$(PREFIX)/lib/$(LIBRARY_SO)
+	$(RM) $(DESTDIR)$(PREFIX)/man1/bsddialog.3
 
 $(LIBRARY): $(OBJECTS)
 	$(CC) $(LIBFLAG) $^ -o $(LIBRARY_SO).$(VERSION) $(LDFLAGS)

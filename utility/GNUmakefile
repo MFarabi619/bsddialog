@@ -26,9 +26,11 @@ all: $(OUTPUT)
 
 install: all
 	$(INSTALL) -m 0755 $(OUTPUT) $(DESTDIR)$(PREFIX)/bin/$(OUTPUT)
+	$(INSTALL) -m 0644 bsddialog.1 $(DESTDIR)$(PREFIX)/man1/bsddialog.1
 
 uninstall:
 	$(RM) $(DESTDIR)$(PREFIX)/bin/$(OUTPUT)
+	$(RM) $(DESTDIR)$(PREFIX)/man1/bsddialog.1
 
 $(OUTPUT): $(OBJECTS)
 	$(CC) $^ -o $@ $(LDFLAGS)
