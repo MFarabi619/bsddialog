@@ -14,7 +14,9 @@ RM= rm -f
 LN = ln -s -f
 
 ### command-line options ###
-# FreeBSD port Makefile: 'MAKE_ARGS = -DNORPATH'
+# Library run time search path, for system lib path (for package creation):
+#  FreeBSD port Makefile 'MAKE_ARGS = -DNORPATH' or Linux `gmake NORPATH=1`
+# otherwise the utility looks for the library in <gitrepo>/lib.
 NORPATH ?=
 export DISABLERPATH=${NORPATH}
 # Debug: `make -DDEBUG` or `gmake DEBUG=1`
