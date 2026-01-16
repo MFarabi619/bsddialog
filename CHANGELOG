@@ -1,4 +1,4 @@
-2026-01-16 Version 1.1.1
+Next
 
 	Linux, GCC, GNU Makefile, and CI:
 	* add: correct include path for wide characters ncurses.
