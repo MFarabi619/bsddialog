@@ -1,6 +1,7 @@
 Next
 	fix: GNU makefiles installation.
 	  https://gitlab.com/alfix/bsddialog/-/issues/11
+	  thanks to https://gitlab.com/alfix/bsddialog/-/merge_requests/11
 
 2026-01-16 Version 1.1.1
 
