@@ -7,6 +7,7 @@ OUTPUT =  bsddialog
 SOURCES = bsddialog.c util_builders.c util_cli.c util_theme.c
 OBJECTS = $(SOURCES:.c=.o)
 PREFIX ?= /usr/local
+LIBPATH ?= ../lib
 
 ifneq ($(ENABLEDEBUG),)
 CFLAGS += -g
@@ -25,7 +26,7 @@ RM = rm -f
 all: $(OUTPUT)
 
 install: all
-	mkdir - p $(DESTDIR)$(PREFIX)/bin
+	mkdir -p $(DESTDIR)$(PREFIX)/bin
 	$(INSTALL) -m 0755 $(OUTPUT) $(DESTDIR)$(PREFIX)/bin/$(OUTPUT)
 	mkdir -p $(DESTDIR)$(PREFIX)/share/man/man1
 	$(INSTALL) -m 0644 bsddialog.1 $(DESTDIR)$(PREFIX)/share/man/man1/bsddialog.1
