@@ -142,3 +142,4 @@ in the _Public Domain_ to build new projects:
  - add *text* customization to --hmsg *help-message*
  - check --passwordform *fieldlen* like --form and --mixedform.
  - add manuals to Makefiles install and uninstall targets.
+ - add env BSDDIALOGOPTS="--ascii-lines ... ".
