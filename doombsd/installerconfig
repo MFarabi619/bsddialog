@@ -1,0 +1,29 @@
+DISTRIBUTIONS="kernel.txz kernel-dbg.txz base.txz base-dbg.txz lib32.txz lib32-dbg.txz ports.txz src.txz tests.txz"
+nonInteractive="NO"
+
+# export nonInteractive="YES"
+# export netDev="auto"
+export keymap="us.ctrl.kbd"
+export hostname="freebsd-framework-16-vm"
+export services="sshd ntpd ntpd_sync_on_start local_unbound powerd moused dumpdev"
+
+export ROOTPASS_PLAIN="root"
+export BSDINSTALL_SKIP_HARDENING="YES"
+
+# Disk/ZFS layout (from your actual machine)
+export ZFSBOOT_DISKS="vtbd0"
+export ZFSBOOT_POOL_NAME="zroot"
+export ZFSBOOT_VDEV_TYPE=stripe
+export ZFSBOOT_FORCE_4K_SECTORS=1
+export ZFSBOOT_SWAP_SIZE="2g"
+export ZFSBOOT_CONFIRM_LAYOUT=1
+
+#!/bin/sh
+echo 'Running installerconfig...'
+sysrc ifconfig_em0=DHCP
+sysrc sshd_enable=YES
+dhclient em0
+
+env ASSUME_ALWAYS_YES=YES pkg bootstrap -f | cat
+
+pkg install -y vim neovim yazi zsh
