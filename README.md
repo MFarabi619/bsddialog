@@ -8,6 +8,17 @@ and a library to build scripts and tools with TUI dialogs and widgets.
 
 [Screenshots](https://www.flickr.com/photos/alfonsosiciliano/albums/72157720215006074).
 
+### Farabi's additions via [Zellij](https://zellij.dev/).
+
+```
+sudo pkg install zellij
+zellij -l zellij.layout.kdl
+```
+
+<img width="2560" height="1600" alt="image" src="https://github.com/user-attachments/assets/21fd6298-b743-4c4e-9085-6e9e709369d6" />
+<img width="2560" height="1600" alt="image" src="https://github.com/user-attachments/assets/1ec79b47-1668-49ce-aadb-7a20d56a5a89" />
+<img width="2560" height="1600" alt="image" src="https://github.com/user-attachments/assets/e8357d85-f656-4330-8cc4-8ed884b6a380" />
+
 
 ## Getting Started
 
