@@ -1,17 +1,18 @@
 const std = @import("std");
 const messages = @import("messages.zig");
+const utils = @import("../shared/utils.zig");
 
 const c = @import("../c/bindings.zig").c;
 const session = @import("../bsddialog/session.zig");
 
-pub const Result = struct {
+pub const TheSummoningRitualResult = struct {
     output: c_int,
     selected: []const u8,
 };
 
-pub fn run(selected_buf: []u8) !Result {
+pub fn run(selected_output_buffer: []u8) !TheSummoningRitualResult {
     var conf: c.struct_bsddialog_conf = undefined;
-    messages.initCliLikeConf(&conf);
+    messages.init_cli_like_conf(&conf);
     conf.title = " The Summoning Ritual";
     conf.bottomtitle = "• ←→ move • ⇥ TAB • ⏎ ENTER •";
     conf.auto_topmargin = 2;
@@ -65,7 +66,7 @@ pub fn run(selected_buf: []u8) !Result {
         null,
     );
     if (output == c.BSDDIALOG_ERROR) {
-        std.debug.print("Error: {s}\n", .{session.getError()});
+        std.debug.print("Error: {s}\n", .{session.get_error()});
         return error.BSDDialogChecklistFailed;
     }
 
@@ -73,33 +74,6 @@ pub fn run(selected_buf: []u8) !Result {
         return .{ .output = output, .selected = "" };
     }
 
-    const selected = try serializeChecklistSelections(items[0..], selected_buf);
+    const selected = try utils.serialize_checklist_selections(items[0..], selected_output_buffer);
     return .{ .output = output, .selected = selected };
-}
-
-fn serializeChecklistSelections(items: []const c.struct_bsddialog_menuitem, buf: []u8) ![]const u8 {
-    var fbs = std.io.fixedBufferStream(buf);
-    const w = fbs.writer();
-
-    var first = true;
-    for (items) |item| {
-        if (!item.on) continue;
-
-        const name = std.mem.span(item.name);
-        if (!first) {
-            try w.writeByte(' ');
-        }
-        first = false;
-
-        const has_space = std.mem.indexOfScalar(u8, name, ' ') != null;
-        if (has_space) {
-            try w.writeByte('"');
-        }
-        try w.writeAll(name);
-        if (has_space) {
-            try w.writeByte('"');
-        }
-    }
-
-    return fbs.getWritten();
 }

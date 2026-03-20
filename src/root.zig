@@ -17,6 +17,10 @@ pub const routes = struct {
     pub const messages = @import("routes/messages.zig");
 };
 
+pub const shared = struct {
+    pub const utils = @import("shared/utils.zig");
+};
+
 pub const widgets = struct {
     pub const infobox = @import("bsddialog/widgets/infobox.zig");
     pub const msgbox = @import("bsddialog/widgets/msgbox.zig");

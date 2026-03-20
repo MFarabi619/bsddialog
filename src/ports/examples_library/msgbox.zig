@@ -9,10 +9,10 @@ pub fn run() !void {
     var output: types.Result = undefined;
     var conf: doombsd.c.struct_bsddialog_conf = undefined;
 
-    session.setLocale();
+    session.set_locale();
 
     session.init() catch {
-        std.debug.print("Error: {s}\n", .{session.getError()});
+        std.debug.print("Error: {s}\n", .{session.get_error()});
         return error.BSDDialogInitFailed;
     };
     defer session.end();
@@ -26,7 +26,7 @@ pub fn run() !void {
 
     switch (output) {
         .@"error" => {
-            std.debug.print("Error {s}\n", .{session.getError()});
+            std.debug.print("Error {s}\n", .{session.get_error()});
             return error.BSDDialogMsgBoxFailed;
         },
         .ok => {

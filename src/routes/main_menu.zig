@@ -4,14 +4,14 @@ const messages = @import("messages.zig");
 const c = @import("../c/bindings.zig").c;
 const session = @import("../bsddialog/session.zig");
 
-pub const Result = struct {
+pub const MainMenuResult = struct {
     output: c_int,
     choice: ?u8,
 };
 
-pub fn run() !Result {
+pub fn run() !MainMenuResult {
     var conf: c.struct_bsddialog_conf = undefined;
-    messages.initCliLikeConf(&conf);
+    messages.init_cli_like_conf(&conf);
     conf.title = "󰇺 Main Menu";
     conf.button.ok_label = "PROCEED";
     conf.button.cancel_label = "FLEE";
@@ -42,7 +42,7 @@ pub fn run() !Result {
         null,
     );
     if (output == c.BSDDIALOG_ERROR) {
-        std.debug.print("Error: {s}\n", .{session.getError()});
+        std.debug.print("Error: {s}\n", .{session.get_error()});
         return error.BSDDialogMenuFailed;
     }
 
