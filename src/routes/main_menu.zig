@@ -4,6 +4,9 @@ const messages = @import("messages.zig");
 const c = @import("../c/bindings.zig").c;
 const session = @import("../bsddialog/session.zig");
 
+const dialog_rows: c_int = 20;
+const dialog_cols: c_int = 60;
+
 pub const MainMenuResult = struct {
     output: c_int,
     choice: ?u8,
@@ -17,7 +20,7 @@ pub fn run() !MainMenuResult {
     conf.button.cancel_label = "FLEE";
     conf.button.with_help = true;
     conf.button.help_label = "HELP";
-    conf.bottomtitle = "• ←→ move • ⇥ TAB • ⏎ ENTER •";
+    conf.bottomtitle = "• ←→ move • ⇥ TAB • ↵ ENTER •";
     conf.auto_topmargin = 2;
 
     c.bsddialog_clear(0);
@@ -29,13 +32,14 @@ pub fn run() !MainMenuResult {
         .{ .name = "L", .desc = " Lore", .bottomdesc = "Credits, inspirations, and heresies.", .on = false, .depth = 0, .prefix = "" },
         .{ .name = "?", .desc = " Seek Help", .bottomdesc = "Links to guides, or whatever remains of them.", .on = false, .depth = 0, .prefix = "" },
         .{ .name = "H", .desc = "󰊢 Health", .bottomdesc = "Check your temperature, fan the flames.", .on = false, .depth = 0, .prefix = "" },
+        .{ .name = "U", .desc = "❖ UI", .bottomdesc = "Choose between Doom themes.", .on = false, .depth = 0, .prefix = "" },
     };
 
     const output = c.bsddialog_menu(
         &conf,
         "Welcome traveller, you have come not seeking peace... but madness, mayhem, and the cursed power of the Void.\n\nBe warned: this path leads only to insane efficiency, terminal sorcery, exceptional UNIX grokking, and ultimate aesthetic overfunction.\n\nBegin the Rite of Configuration, ONLY IF YOU DARE!",
-        0,
-        0,
+        dialog_rows,
+        dialog_cols,
         8,
         items.len,
         &items,

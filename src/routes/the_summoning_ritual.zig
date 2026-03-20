@@ -5,6 +5,9 @@ const utils = @import("../shared/utils.zig");
 const c = @import("../c/bindings.zig").c;
 const session = @import("../bsddialog/session.zig");
 
+const dialog_rows: c_int = 26;
+const dialog_cols: c_int = 96;
+
 pub const TheSummoningRitualResult = struct {
     output: c_int,
     selected: []const u8,
@@ -14,7 +17,7 @@ pub fn run(selected_output_buffer: []u8) !TheSummoningRitualResult {
     var conf: c.struct_bsddialog_conf = undefined;
     messages.init_cli_like_conf(&conf);
     conf.title = " The Summoning Ritual";
-    conf.bottomtitle = "• ←→ move • ⇥ TAB • ⏎ ENTER •";
+    conf.bottomtitle = "• ↔ move • ⇥ TAB • ↵ ENTER •";
     conf.auto_topmargin = 2;
 
     c.bsddialog_clear(0);
@@ -58,8 +61,8 @@ pub fn run(selected_output_buffer: []u8) !TheSummoningRitualResult {
     const output = c.bsddialog_checklist(
         &conf,
         "Here in the chamber, unseen daemons stir beneath the surface... shaping the destiny of your system.",
-        0,
-        0,
+        dialog_rows,
+        dialog_cols,
         18,
         items.len,
         &items,

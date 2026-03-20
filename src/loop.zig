@@ -1,8 +1,10 @@
 const std = @import("std");
 const state_module = @import("state.zig");
 const utils = @import("shared/utils.zig");
+const theme = @import("theme.zig");
 
 const main_menu = @import("routes/main_menu.zig");
+const ui = @import("routes/ui.zig");
 const the_summoning_ritual = @import("routes/the_summoning_ritual.zig");
 const extras = @import("routes/extras.zig");
 const lore = @import("routes/lore.zig");
@@ -15,6 +17,7 @@ const c = @import("c/bindings.zig").c;
 pub fn run() !void {
     var current_state: state_module.State = .main_menu;
     var selected_output_buffer: [4096]u8 = undefined;
+    var current_theme: ui.ThemeChoice = .doom;
 
     while (current_state != .exit) {
         switch (current_state) {
@@ -71,6 +74,22 @@ pub fn run() !void {
                     });
                     current_state = .main_menu;
                 }
+            },
+            .ui => {
+                const ui_result = try ui.run(current_theme);
+
+                if (ui_result.output == c.BSDDIALOG_OK and ui_result.selected_theme != null) {
+                    current_theme = ui_result.selected_theme.?;
+                    switch (current_theme) {
+                        .doom => try theme.apply(),
+                        .orangey_black => try theme.apply_orangey_black(),
+                        .black_white => try theme.apply_black_white(),
+                    }
+                    current_state = .ui;
+                    continue;
+                }
+
+                current_state = .main_menu;
             },
             .the_summoning_ritual => {
                 const the_summoning_ritual_result = try the_summoning_ritual.run(selected_output_buffer[0..]);

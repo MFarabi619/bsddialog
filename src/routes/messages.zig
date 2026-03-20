@@ -26,4 +26,5 @@ pub fn init_cli_like_conf(conf: *c.struct_bsddialog_conf) void {
     _ = c.bsddialog_initconf(conf);
     conf.key.enable_esc = true;
     conf.button.always_active = true;
+    conf.menu.shortcut_buttons = true;
 }

@@ -2,6 +2,7 @@ const c = @import("c/bindings.zig").c;
 
 pub const State = enum {
     main_menu,
+    ui,
     the_summoning_ritual,
     extras,
     lore,
@@ -28,6 +29,7 @@ pub fn event_from_output(dialog_output: c_int) DialogEvent {
 
 pub fn route_from_menu_choice(menu_choice: u8) ?State {
     return switch (menu_choice) {
+        'U' => .ui,
         'D' => .the_summoning_ritual,
         'X' => .extras,
         'L' => .lore,

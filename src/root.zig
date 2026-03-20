@@ -9,6 +9,7 @@ pub const session = @import("bsddialog/session.zig");
 
 pub const routes = struct {
     pub const main_menu = @import("routes/main_menu.zig");
+    pub const ui = @import("routes/ui.zig");
     pub const the_summoning_ritual = @import("routes/the_summoning_ritual.zig");
     pub const extras = @import("routes/extras.zig");
     pub const lore = @import("routes/lore.zig");
