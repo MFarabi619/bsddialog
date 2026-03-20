@@ -1,5 +1,6 @@
 layout {
     pane_template name="examples_utility" command="sh"
+    pane_template name="examples_library" cwd="examples_library" 
     default_tab_template {
         pane {
             size 1
@@ -13,7 +14,11 @@ layout {
             plugin location="zellij:status-bar"
         }
     }
-    tab split_direction="vertical" start_suspended="false" close_on_exit="false" {
+    tab name="🟥 boxes" split_direction="vertical" start_suspended="false" close_on_exit="false" {
+        floating_panes {
+          pane cwd="examples_library" command="./theme"  
+        } 
+
         pane split_direction="horizontal" {
         pane split_direction="vertical" {
         examples_utility {
@@ -52,17 +57,19 @@ layout {
             }
             }
             }
-    tab start_suspended="false" close_on_exit="false" {
+    tab name="📋 lists & forms" start_suspended="false" close_on_exit="false" {
         pane split_direction="vertical" {
+        examples_utility {
+            args "examples_utility/menu.sh"
+            }
         examples_utility {
             args "examples_utility/checklist.sh"
             }
         examples_utility {
             args "examples_utility/radiolist.sh"
             }
-        examples_utility {
-            args "examples_utility/menu.sh"
-            }
+
+        examples_library command="./mixedlist"
             }
         pane split_direction="vertical" {
         examples_utility {
@@ -76,7 +83,7 @@ layout {
             }
             }
     }
-    tab split_direction="vertical" start_suspended="false" close_on_exit="false" {
+    tab name="⌛ gauges" split_direction="vertical" start_suspended="false" close_on_exit="false" {
         pane split_direction="horizontal" {
         examples_utility {
             args "-c" "while true; do ./examples_utility/pause.sh; sleep 0.5; done"
@@ -88,8 +95,11 @@ layout {
             args "-c" "while true; do ./examples_utility/gauge.sh; sleep 0.5; done"
             }
             }
+        pane split_direction="horizontal" {
         examples_utility {
             args "-c" "while true; do ./examples_utility/mixedgauge.sh; sleep 0.5; done"
             }
-}
+
+            }
+    }
     }
