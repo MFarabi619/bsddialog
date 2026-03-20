@@ -1,7 +1,7 @@
 const std = @import("std");
 const state_module = @import("state.zig");
-const utils = @import("shared/utils.zig");
 const theme = @import("theme.zig");
+const dry_run_installer = @import("dry_run_installer.zig");
 
 const main_menu = @import("routes/main_menu.zig");
 const ui = @import("routes/ui.zig");
@@ -95,10 +95,14 @@ pub fn run() !void {
                 const the_summoning_ritual_result = try the_summoning_ritual.run(selected_output_buffer[0..]);
 
                 if (the_summoning_ritual_result.output == c.BSDDIALOG_OK) {
-                    const formatted_message = try utils.allocate_formatted_c_string(std.heap.c_allocator, "You chose to configure:\n\n{s}\n\nLet the rite begin...", .{the_summoning_ritual_result.selected});
+                    const formatted_message = try dry_run_installer.apply_selection_and_build_summary(
+                        std.heap.c_allocator,
+                        .the_summoning_ritual,
+                        the_summoning_ritual_result.selected,
+                    );
                     defer std.heap.c_allocator.free(formatted_message);
 
-                    try messages.show(.{ .text = formatted_message, .rows = 12, .cols = 60 });
+                    try messages.show(.{ .text = formatted_message, .rows = 20, .cols = 96 });
                 } else {
                     try messages.show(.{
                         .text = "You fled the chamber. No changes made to your fate.",
@@ -113,10 +117,14 @@ pub fn run() !void {
                 const extras_result = try extras.run(selected_output_buffer[0..]);
 
                 if (extras_result.output == c.BSDDIALOG_OK) {
-                    const formatted_message = try utils.allocate_formatted_c_string(std.heap.c_allocator, "You selected:\n{s}", .{extras_result.selected});
+                    const formatted_message = try dry_run_installer.apply_selection_and_build_summary(
+                        std.heap.c_allocator,
+                        .extras,
+                        extras_result.selected,
+                    );
                     defer std.heap.c_allocator.free(formatted_message);
 
-                    try messages.show(.{ .text = formatted_message, .rows = 10, .cols = 60 });
+                    try messages.show(.{ .text = formatted_message, .rows = 20, .cols = 96 });
                 } else {
                     try messages.show(.{
                         .text = "No extras selected. The void remains untouched.",

@@ -3,6 +3,7 @@ pub const c = @import("c/bindings.zig").c;
 pub const state = @import("state.zig");
 pub const loop = @import("loop.zig");
 pub const theme = @import("theme.zig");
+pub const dry_run_installer = @import("dry_run_installer.zig");
 
 pub const types = @import("bsddialog/types.zig");
 pub const session = @import("bsddialog/session.zig");
