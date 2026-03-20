@@ -25,3 +25,5 @@ examples_library/textbox
 examples_library/theme
 examples_library/timebox
 examples_library/yesno
+zig-out
+.zig-cache
